@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(81, 151, 151);
+        }
+
+        h1 {
+            text-align: center;
+            color: red;
+        }
+
+        button {
+            color: white;
+            background-color: #007bff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .div1 {
+            width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgb(148, 197, 148);
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .div2 {
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <h1>TO DO LIST</h1>
+        <div class="div2">
+            <input type="text" id="text1" placeholder="Add task">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="task-list"></ul> <!-- Task list where tasks will be added -->
+    </div>
+
+    <script>
+        function addTask() {
+            const textInput = document.getElementById("text1");
+            const task = textInput.value.trim();
+
+            // Check if input is empty
+            if (task === "") {
+                alert("Please write something!");
+                return;
+            }
+
+            // Get task list container
+            const taskList = document.getElementById("task-list");
+
+            // Create a new list item
+            const li = document.createElement("li");
+
+            // Create the delete button
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete";
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.onclick = function() {
+                removeTask(li);
+            };
+
+            // Set the innerHTML for the task content and append the delete button
+            li.innerHTML = task;
+            li.appendChild(deleteBtn);
+
+            // Append the new task to the list
+            taskList.appendChild(li);
+
+            // Clear the input field
+            textInput.value = '';
+        }
+
+        function removeTask(listItem) {
+            const taskList = document.getElementById("task-list");
+            taskList.removeChild(listItem);
+        }
+    </script>
+</body>
+</html>
